@@ -18,12 +18,12 @@ class NetworkManager {
     
     private init() {}
     
-    func fetchFilms(from url: String, completionHandler: @escaping (Result<Films, NetworkError>) -> Void) {
-        guard let url = URL(string: url) else {
-            
-            completionHandler(Result.failure(.invalidURL))
-            return
-        }
+    func fetchFilms(from url: URL, completionHandler: @escaping (Result<Films, NetworkError>) -> Void) {
+//        guard let url = URL(string: url) else {
+//
+//            completionHandler(Result.failure(.invalidURL))
+//            return
+//        }
         
         var request = URLRequest(url: url)
         

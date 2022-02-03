@@ -16,16 +16,12 @@ class TableViewController: UITableViewController {
         
         tableView.rowHeight = 150
         
-        let url = "https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword=spider%20man&page=1"
-        NetworkManager.shared.fetchFilms(from: url) { result in
-            switch result {
-                
-            case .success(let films):
-                self.films = films.films
-                self.tableView.reloadData()
-            case .failure(let error):
-                print(error)
-            }
+        let kinopoiskManager = KinopoiskFilmsManager()
+        
+        
+        kinopoiskManager.fetchFilmsList(keyword: "Морбиус") { films in
+            self.films = films
+            self.tableView.reloadData()
         }
     }
 

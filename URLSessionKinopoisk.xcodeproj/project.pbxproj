@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		787AA62027ABC95B0031F5DC /* KinopoiskFilmsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787AA61F27ABC95B0031F5DC /* KinopoiskFilmsManager.swift */; };
 		789C167B27AAE6FE0056981A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789C167A27AAE6FE0056981A /* AppDelegate.swift */; };
 		789C167D27AAE6FE0056981A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789C167C27AAE6FE0056981A /* SceneDelegate.swift */; };
 		789C168227AAE6FE0056981A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 789C168027AAE6FE0056981A /* Main.storyboard */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		787AA61F27ABC95B0031F5DC /* KinopoiskFilmsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinopoiskFilmsManager.swift; sourceTree = "<group>"; };
 		789C167727AAE6FE0056981A /* URLSessionKinopoisk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = URLSessionKinopoisk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		789C167A27AAE6FE0056981A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		789C167C27AAE6FE0056981A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 				789C167C27AAE6FE0056981A /* SceneDelegate.swift */,
 				789C168E27AAE7610056981A /* TableViewController.swift */,
 				789C169227AAED3A0056981A /* NetworkManager.swift */,
+				787AA61F27ABC95B0031F5DC /* KinopoiskFilmsManager.swift */,
 				789C169027AAEBF60056981A /* Film.swift */,
 				789C168027AAE6FE0056981A /* Main.storyboard */,
 				789C168327AAE7000056981A /* Assets.xcassets */,
@@ -145,6 +148,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				789C167B27AAE6FE0056981A /* AppDelegate.swift in Sources */,
+				787AA62027ABC95B0031F5DC /* KinopoiskFilmsManager.swift in Sources */,
 				789C169127AAEBF70056981A /* Film.swift in Sources */,
 				789C169327AAED3A0056981A /* NetworkManager.swift in Sources */,
 				789C168F27AAE7610056981A /* TableViewController.swift in Sources */,
