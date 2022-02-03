@@ -7,7 +7,7 @@
 
 import Foundation
 
-class KinopoiskFilmsManager {
+final class KinopoiskFilmsManager {
     
     static let shared = KinopoiskFilmsManager()
     
