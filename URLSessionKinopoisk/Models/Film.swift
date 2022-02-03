@@ -19,7 +19,7 @@ struct Film {
     
     let releases: [Release]
     
-    static func createFilm(film: FilmByKeyword, release: FilmWithDistributionInfo) -> Film {
+    static func createFilm(film: FilmByKeyword, release: FilmWithReleaseDate) -> Film {
         let releases = release.items.map { item in
             Release(date: item.date, country: item.country?.country)
         }

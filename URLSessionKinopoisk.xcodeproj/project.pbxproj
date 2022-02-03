@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		787AA62027ABC95B0031F5DC /* KinopoiskFilmsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787AA61F27ABC95B0031F5DC /* KinopoiskFilmsManager.swift */; };
-		787AA62227ABD4490031F5DC /* FilmWithDistributionInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787AA62127ABD4490031F5DC /* FilmWithDistributionInfo.swift */; };
+		787AA62227ABD4490031F5DC /* FilmWithReleaseDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787AA62127ABD4490031F5DC /* FilmWithReleaseDate.swift */; };
 		787AA62527ABD9CA0031F5DC /* Film.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787AA62427ABD9CA0031F5DC /* Film.swift */; };
 		789C167B27AAE6FE0056981A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789C167A27AAE6FE0056981A /* AppDelegate.swift */; };
 		789C167D27AAE6FE0056981A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789C167C27AAE6FE0056981A /* SceneDelegate.swift */; };
@@ -22,7 +22,7 @@
 
 /* Begin PBXFileReference section */
 		787AA61F27ABC95B0031F5DC /* KinopoiskFilmsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinopoiskFilmsManager.swift; sourceTree = "<group>"; };
-		787AA62127ABD4490031F5DC /* FilmWithDistributionInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmWithDistributionInfo.swift; sourceTree = "<group>"; };
+		787AA62127ABD4490031F5DC /* FilmWithReleaseDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmWithReleaseDate.swift; sourceTree = "<group>"; };
 		787AA62427ABD9CA0031F5DC /* Film.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Film.swift; sourceTree = "<group>"; };
 		789C167727AAE6FE0056981A /* URLSessionKinopoisk.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = URLSessionKinopoisk.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		789C167A27AAE6FE0056981A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -50,9 +50,9 @@
 		787AA62327ABD8F60031F5DC /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				789C169027AAEBF60056981A /* FilmByKeyword.swift */,
-				787AA62127ABD4490031F5DC /* FilmWithDistributionInfo.swift */,
 				787AA62427ABD9CA0031F5DC /* Film.swift */,
+				789C169027AAEBF60056981A /* FilmByKeyword.swift */,
+				787AA62127ABD4490031F5DC /* FilmWithReleaseDate.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -176,7 +176,7 @@
 				789C168F27AAE7610056981A /* TableViewController.swift in Sources */,
 				787AA62527ABD9CA0031F5DC /* Film.swift in Sources */,
 				789C167D27AAE6FE0056981A /* SceneDelegate.swift in Sources */,
-				787AA62227ABD4490031F5DC /* FilmWithDistributionInfo.swift in Sources */,
+				787AA62227ABD4490031F5DC /* FilmWithReleaseDate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

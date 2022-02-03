@@ -57,10 +57,10 @@ final class KinopoiskFilmsManager {
         }
     }
     
-    private func fetchFilmDistributionInfo(filmID: Int, completionHandler: @escaping (FilmWithDistributionInfo) -> Void) {
+    private func fetchFilmDistributionInfo(filmID: Int, completionHandler: @escaping (FilmWithReleaseDate) -> Void) {
         let stringURL = "\(filmIDLink)/\(filmID)/distributions"
         
-        NetworkManager.shared.fetch(FilmWithDistributionInfo.self, from: stringURL) { result in
+        NetworkManager.shared.fetch(FilmWithReleaseDate.self, from: stringURL) { result in
             switch result {
                 
             case .success(let filmDistributionInfo):

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FilmWithDistributionInfo: Decodable {
+struct FilmWithReleaseDate: Decodable {
     let items: [Item]
 }
 
