@@ -7,18 +7,18 @@
 
 import Foundation
 
-struct Films: Decodable {
-    let pagesCount: Int
-    let films: [Film]
+struct FoundedFilms: Decodable {
+    let films: [FoundedFilm]
 }
 
-struct Film: Decodable {
-    let filmId: Int?
+struct FoundedFilm: Decodable {
+    let filmId: Int
     let nameRu: String?
     let nameEn: String?
     let description: String?
-    let type: String?
     let year: String?
+    let rating: String?
+    let type: String?
     
     let posterUrlPreview: String?
 }

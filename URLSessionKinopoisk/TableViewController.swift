@@ -16,12 +16,11 @@ class TableViewController: UITableViewController {
         
         tableView.rowHeight = 150
         
-        let kinopoiskManager = KinopoiskFilmsManager()
-        
-        
-        kinopoiskManager.fetchFilmsList(keyword: "Морбиус") { films in
-            self.films = films
+        KinopoiskFilmsManager.shared.findFilmsWithDistributionInfo(name: "аватар") { film in
+            self.films.append(film)
             self.tableView.reloadData()
+        } faulireHandler: {
+            print("Data is empty")
         }
     }
 
@@ -44,8 +43,8 @@ class TableViewController: UITableViewController {
             let dataForImage = NetworkManager.shared.fetchImage(from: filmForCell.posterUrlPreview) ?? Data()
             
             DispatchQueue.main.async {
-                content.image = UIImage(data: dataForImage)
-                cell.contentConfiguration = content
+//                content.image = UIImage(data: dataForImage)
+//                cell.contentConfiguration = content
             }
         }
         
@@ -53,5 +52,7 @@ class TableViewController: UITableViewController {
         return cell
     }
 
-
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        dump(films[indexPath.row])
+    }
 }

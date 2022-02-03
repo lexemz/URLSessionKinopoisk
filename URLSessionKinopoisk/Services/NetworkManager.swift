@@ -8,7 +8,6 @@
 import Foundation
 
 enum NetworkError: Error {
-    case invalidURL
     case noData
     case decodingError
 }
@@ -18,12 +17,7 @@ class NetworkManager {
     
     private init() {}
     
-    func fetchFilms(from url: URL, completionHandler: @escaping (Result<Films, NetworkError>) -> Void) {
-//        guard let url = URL(string: url) else {
-//
-//            completionHandler(Result.failure(.invalidURL))
-//            return
-//        }
+    func fetch<T: Decodable>(model: T.Type, from url: URL, completionHandler: @escaping (Result<T, NetworkError>) -> Void) {
         
         var request = URLRequest(url: url)
         
@@ -41,11 +35,7 @@ class NetworkManager {
             }
             
             do {
-                let filmsInDict = try JSONSerialization.jsonObject(with: data)
-                print(filmsInDict)
-                
-                
-                let films = try JSONDecoder().decode(Films.self, from: data)
+                let films = try JSONDecoder().decode(T.self, from: data)
                 
                 DispatchQueue.main.async {
                     completionHandler(.success(films))
