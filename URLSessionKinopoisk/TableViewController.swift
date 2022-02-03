@@ -16,8 +16,8 @@ class TableViewController: UITableViewController {
         
         tableView.rowHeight = 150
         
-        KinopoiskFilmsManager.shared.findFilmsWithDistributionInfo(name: "аватар") { film in
-            self.films.append(film)
+        KinopoiskFilmsManager.shared.findFilmsWithDistributionInfo(name: "аватар") { films in
+            self.films = films
             self.tableView.reloadData()
         } faulireHandler: {
             print("Data is empty")
@@ -43,8 +43,8 @@ class TableViewController: UITableViewController {
             let dataForImage = NetworkManager.shared.fetchImage(from: filmForCell.posterUrlPreview) ?? Data()
             
             DispatchQueue.main.async {
-//                content.image = UIImage(data: dataForImage)
-//                cell.contentConfiguration = content
+                content.image = UIImage(data: dataForImage)
+                cell.contentConfiguration = content
             }
         }
         

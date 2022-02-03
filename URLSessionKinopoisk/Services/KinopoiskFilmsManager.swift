@@ -16,18 +16,37 @@ class KinopoiskFilmsManager {
     
     private init() {}
     
-    private func fetchFilmsList(keyword: String, completionHandler: @escaping ([FoundedFilm]) -> Void){
+    func findFilmsWithDistributionInfo(name: String, completionHandler: @escaping ([Film]) -> Void, faulireHandler: @escaping () -> Void) {
         
-        var urlComps = URLComponents(string: keywordLink)
-        let queryItem = URLQueryItem(name: "keyword", value: keyword)
-        urlComps?.queryItems = [queryItem]
-        
-        guard let urlWithComps = urlComps?.url else {
-            print("URL IS NOT WALID")
-            return
+        fetchFilmsList(keyword: name) { films in
+            let upcomingFilms = films.filter { Int($0.year ?? "") ?? 0 >= self.getCurrentYear() && $0.rating == "null" }
+            
+            guard upcomingFilms.count != 0 else {
+                faulireHandler()
+                return
+            }
+            
+            var films: [Film] = []
+            dump(films)
+            for film in upcomingFilms {
+                self.fetchFilmDistributionInfo(filmID: film.filmId) { filmWithDistributionInfo in
+                    let film = Film.createFilm(film: film, release: filmWithDistributionInfo)
+                    
+                    films.append(film)
+                    if films.count  == upcomingFilms.count {
+                        completionHandler(films)
+                        
+                    }
+                }
+            }
         }
+    }
+    
+    private func fetchFilmsList(keyword: String, completionHandler: @escaping ([FilmByKeyword]) -> Void){
         
-        NetworkManager.shared.fetch(model: FoundedFilms.self, from: urlWithComps) { result in
+        let queryItem = URLQueryItem(name: "keyword", value: keyword)
+        
+        NetworkManager.shared.fetchWithComponents(FilmsByKeyword.self, from: keywordLink, with: [queryItem]) { result in
             switch result {
                 
             case .success(let films):
@@ -40,12 +59,8 @@ class KinopoiskFilmsManager {
     
     private func fetchFilmDistributionInfo(filmID: Int, completionHandler: @escaping (FilmWithDistributionInfo) -> Void) {
         let stringURL = "\(filmIDLink)/\(filmID)/distributions"
-        guard let urlWithID = URL(string: stringURL) else {
-            print("URL IS NOT WALID")
-            return
-        }
         
-        NetworkManager.shared.fetch(model: FilmWithDistributionInfo.self, from: urlWithID) { result in
+        NetworkManager.shared.fetch(FilmWithDistributionInfo.self, from: stringURL) { result in
             switch result {
                 
             case .success(let filmDistributionInfo):
@@ -56,24 +71,9 @@ class KinopoiskFilmsManager {
         }
     }
     
-    func findFilmsWithDistributionInfo(name: String, completionHandler: @escaping (Film) -> Void, faulireHandler: @escaping () -> Void) {
-        fetchFilmsList(keyword: name) { films in
-            let films = films.filter { Int($0.year ?? "") ?? 0 >= 2022 && $0.rating == "null" }
-            
-            guard films.count != 0 else {
-                faulireHandler()
-                return
-            }
-            
-            
-            dump(films)
-            for film in films {
-                self.fetchFilmDistributionInfo(filmID: film.filmId) { filmWithDistributionInfo in
-                    let film = Film.createFilm(film: film, release: filmWithDistributionInfo)
-                    
-                    completionHandler(film)
-                }
-            }
-        }
+    private func getCurrentYear() -> Int {
+        let date = Date()
+        let calendar = Calendar.current
+        return calendar.component(.year, from: date)
     }
 }

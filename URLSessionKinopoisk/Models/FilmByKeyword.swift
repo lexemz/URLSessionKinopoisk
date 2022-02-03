@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct FoundedFilms: Decodable {
-    let films: [FoundedFilm]
+struct FilmsByKeyword: Decodable {
+    let films: [FilmByKeyword]
 }
 
-struct FoundedFilm: Decodable {
+struct FilmByKeyword: Decodable {
     let filmId: Int
     let nameRu: String?
     let nameEn: String?

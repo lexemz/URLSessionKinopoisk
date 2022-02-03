@@ -8,6 +8,7 @@
 import Foundation
 
 enum NetworkError: Error {
+    case invalidURL
     case noData
     case decodingError
 }
@@ -17,19 +18,26 @@ class NetworkManager {
     
     private init() {}
     
-    func fetch<T: Decodable>(model: T.Type, from url: URL, completionHandler: @escaping (Result<T, NetworkError>) -> Void) {
+    func fetch<T: Decodable>(
+        _ model: T.Type,
+        from url: String,
+        completion: @escaping (Result<T, NetworkError>) -> Void
+    ) {
+        guard let url = URL(string: url) else {
+            completion(.failure(.invalidURL))
+            return
+        }
         
         var request = URLRequest(url: url)
-        
         request.httpMethod = "GET"
-//        request.addValue("application/json", forHTTPHeaderField: "accept")
+        request.addValue("application/json", forHTTPHeaderField: "accept")
         request.addValue("dfbdb563-ebca-44db-92ae-b6dbbd58219f", forHTTPHeaderField: "X-API-KEY")
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             guard let data = data, let _ = response else {
                 
                 DispatchQueue.main.async {
-                    completionHandler(.failure(.noData))
+                    completion(.failure(.noData))
                 }
                 return
             }
@@ -38,12 +46,55 @@ class NetworkManager {
                 let films = try JSONDecoder().decode(T.self, from: data)
                 
                 DispatchQueue.main.async {
-                    completionHandler(.success(films))
+                    completion(.success(films))
                 }
             } catch {
                 
                 DispatchQueue.main.async {
-                    completionHandler(.failure(.decodingError))
+                    completion(.failure(.decodingError))
+                }
+            }
+        }.resume()
+    }
+    
+    func fetchWithComponents<T: Decodable>(
+        _ model: T.Type,
+        from url: String,
+        with components: [URLQueryItem],
+        completion: @escaping (Result<T, NetworkError>) -> Void
+    ) {
+        var urlComps = URLComponents(string: url)
+        urlComps?.queryItems = components
+        
+        guard let url = urlComps?.url else {
+            completion(.failure(.invalidURL))
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        request.addValue("application/json", forHTTPHeaderField: "accept")
+        request.addValue("dfbdb563-ebca-44db-92ae-b6dbbd58219f", forHTTPHeaderField: "X-API-KEY")
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            guard let data = data, let _ = response else {
+                
+                DispatchQueue.main.async {
+                    completion(.failure(.noData))
+                }
+                return
+            }
+            
+            do {
+                let films = try JSONDecoder().decode(T.self, from: data)
+                
+                DispatchQueue.main.async {
+                    completion(.success(films))
+                }
+            } catch {
+                
+                DispatchQueue.main.async {
+                    completion(.failure(.decodingError))
                 }
             }
         }.resume()
