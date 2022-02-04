@@ -1,26 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="MgX-r3-iSk">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Aye-Iq-Whc">
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Root View Controller-->
+        <!--Find Film-->
         <scene sceneID="rbV-ik-vTg">
             <objects>
                 <tableViewController id="a8J-yJ-zne" customClass="SearchFilmsTableViewController" customModule="URLSessionKinopoisk" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="6c6-Wq-t32">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="548"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="Poh-hr-iVE">
-                                <rect key="frame" x="0.0" y="44.5" width="414" height="43.5"/>
+                                <rect key="frame" x="0.0" y="44.5" width="320" height="43.5"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Poh-hr-iVE" id="PFH-fW-DYf">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -30,18 +31,67 @@
                             <outlet property="delegate" destination="a8J-yJ-zne" id="Aqm-Em-Dgw"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="vO6-eB-aM0"/>
+                    <navigationItem key="navigationItem" title="Find Film" id="vO6-eB-aM0">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="2BW-zK-ETM">
+                            <connections>
+                                <action selector="dismissViewController:" destination="a8J-yJ-zne" id="UcU-ZH-Xvc"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sP8-pV-JBr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-16" y="-26"/>
+            <point key="canvasLocation" x="892.75362318840587" y="-26.116071428571427"/>
+        </scene>
+        <!--Kinopoisk Movies-->
+        <scene sceneID="Rwg-w3-IV2">
+            <objects>
+                <viewController id="qsj-UZ-sOX" customClass="MainScreenViewController" customModule="URLSessionKinopoisk" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="iMQ-eu-ynC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Type Film" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WUG-Rw-Atu">
+                                <rect key="frame" x="16" y="107" width="288" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UgK-ZJ-mhC">
+                                <rect key="frame" x="178" y="144" width="126" height="28"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Search In Kinopoisk?"/>
+                                <connections>
+                                    <segue destination="MgX-r3-iSk" kind="presentation" id="Sii-Gg-hsn"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Cgv-Jk-l1G"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Cgv-Jk-l1G" firstAttribute="trailing" secondItem="UgK-ZJ-mhC" secondAttribute="trailing" constant="16" id="1rk-Mz-uae"/>
+                            <constraint firstItem="WUG-Rw-Atu" firstAttribute="leading" secondItem="Cgv-Jk-l1G" secondAttribute="leading" constant="16" id="6tF-5z-GsO"/>
+                            <constraint firstItem="UgK-ZJ-mhC" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Cgv-Jk-l1G" secondAttribute="leading" symbolic="YES" id="NwP-yZ-pC3"/>
+                            <constraint firstItem="Cgv-Jk-l1G" firstAttribute="trailing" secondItem="WUG-Rw-Atu" secondAttribute="trailing" constant="16" id="Wjy-uB-FaP"/>
+                            <constraint firstItem="WUG-Rw-Atu" firstAttribute="top" secondItem="Cgv-Jk-l1G" secondAttribute="top" constant="16" id="fRv-L6-Lda"/>
+                            <constraint firstItem="UgK-ZJ-mhC" firstAttribute="top" secondItem="WUG-Rw-Atu" secondAttribute="bottom" constant="3" id="h91-fu-7by"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Kinopoisk Movies" id="lIf-7J-51R"/>
+                    <connections>
+                        <outlet property="mainTextField" destination="WUG-Rw-Atu" id="sm6-If-Oyk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rJP-40-5dJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-944.92753623188412" y="-26.116071428571427"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="1Zo-bU-Sh3">
             <objects>
                 <navigationController id="MgX-r3-iSk" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="jt2-1S-3Wv">
-                        <rect key="frame" x="0.0" y="44" width="414" height="96"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jt2-1S-3Wv">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -50,7 +100,25 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uyC-Fk-F62" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-907" y="-26"/>
+            <point key="canvasLocation" x="2.8985507246376816" y="-26.116071428571427"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="EWs-vn-F3N">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Aye-Iq-Whc" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="SMc-Df-uLv">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="91"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="qsj-UZ-sOX" kind="relationship" relationship="rootViewController" id="860-IK-D9e"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ibK-IK-opx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1855.072463768116" y="-26.116071428571427"/>
         </scene>
     </scenes>
     <resources>

@@ -62,7 +62,7 @@ final class NetworkManager {
         from url: String,
         with components: [URLQueryItem],
         completion: @escaping (Result<T, NetworkError>) -> Void
-    ) {
+    ) {   
         var urlComps = URLComponents(string: url)
         urlComps?.queryItems = components
         

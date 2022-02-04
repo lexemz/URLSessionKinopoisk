@@ -9,24 +9,48 @@ import UIKit
 
 class SearchFilmsTableViewController: UITableViewController {
     
-    var films: [Film] = []
+    private var films: [Film] = []
+    var filmFromTextfield: String?
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
         tableView.rowHeight = 150
         
-        KinopoiskFilmsManager.shared.findFilmsWithDistributionInfo(name: "аватар") { films in
+        fetchData()
+    }
+    
+    private func fetchData() {
+        guard let filmFromTextfield = filmFromTextfield else {
+            return
+        }
+
+        KinopoiskFilmsManager.shared.findFilmsWithDistributionInfo(name: filmFromTextfield) { films in
             self.films = films
             self.tableView.reloadData()
         } faulireHandler: {
             print("Data is empty")
         }
     }
+    
+    @IBAction func dismissViewController(_ sender: UIBarButtonItem) {
+        dismiss(animated: true)
+    }
+    
+    deinit {
+        print("VC is closed")
+    }
+}
 
-    // MARK: - Table view data source
-
+// MARK: - Table view delegate
+extension SearchFilmsTableViewController {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        dump(films[indexPath.row])
+    }
+}
+ 
+// MARK: - Table view data source
+extension SearchFilmsTableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         films.count
     }
@@ -52,16 +76,4 @@ class SearchFilmsTableViewController: UITableViewController {
         cell.contentConfiguration = content
         return cell
     }
-
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        dump(films[indexPath.row])
-    }
-}
-
-extension SearchFilmsTableViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        <#code#>
-    }
-    
-    
 }
