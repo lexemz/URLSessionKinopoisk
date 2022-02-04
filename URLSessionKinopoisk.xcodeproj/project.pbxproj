@@ -15,7 +15,7 @@
 		789C168227AAE6FE0056981A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 789C168027AAE6FE0056981A /* Main.storyboard */; };
 		789C168427AAE7000056981A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 789C168327AAE7000056981A /* Assets.xcassets */; };
 		789C168727AAE7000056981A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 789C168527AAE7000056981A /* LaunchScreen.storyboard */; };
-		789C168F27AAE7610056981A /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789C168E27AAE7610056981A /* TableViewController.swift */; };
+		789C168F27AAE7610056981A /* SearchFilmsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789C168E27AAE7610056981A /* SearchFilmsTableViewController.swift */; };
 		789C169127AAEBF70056981A /* FilmByKeyword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789C169027AAEBF60056981A /* FilmByKeyword.swift */; };
 		789C169327AAED3A0056981A /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 789C169227AAED3A0056981A /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
@@ -31,7 +31,7 @@
 		789C168327AAE7000056981A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		789C168627AAE7000056981A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		789C168827AAE7000056981A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		789C168E27AAE7610056981A /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		789C168E27AAE7610056981A /* SearchFilmsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFilmsTableViewController.swift; sourceTree = "<group>"; };
 		789C169027AAEBF60056981A /* FilmByKeyword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmByKeyword.swift; sourceTree = "<group>"; };
 		789C169227AAED3A0056981A /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -85,17 +85,41 @@
 		789C167927AAE6FE0056981A /* URLSessionKinopoisk */ = {
 			isa = PBXGroup;
 			children = (
-				789C167A27AAE6FE0056981A /* AppDelegate.swift */,
-				789C167C27AAE6FE0056981A /* SceneDelegate.swift */,
-				789C168E27AAE7610056981A /* TableViewController.swift */,
+				78B930B327AD4F4A0008CD18 /* ViewControllers */,
 				787AA62627AC6E340031F5DC /* Services */,
 				787AA62327ABD8F60031F5DC /* Models */,
-				789C168027AAE6FE0056981A /* Main.storyboard */,
+				78B930B227AD4F380008CD18 /* App */,
+				78B930B427AD4F550008CD18 /* Storyboards */,
 				789C168327AAE7000056981A /* Assets.xcassets */,
-				789C168527AAE7000056981A /* LaunchScreen.storyboard */,
-				789C168827AAE7000056981A /* Info.plist */,
 			);
 			path = URLSessionKinopoisk;
+			sourceTree = "<group>";
+		};
+		78B930B227AD4F380008CD18 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				789C167A27AAE6FE0056981A /* AppDelegate.swift */,
+				789C167C27AAE6FE0056981A /* SceneDelegate.swift */,
+				789C168827AAE7000056981A /* Info.plist */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		78B930B327AD4F4A0008CD18 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				789C168E27AAE7610056981A /* SearchFilmsTableViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		78B930B427AD4F550008CD18 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				789C168027AAE6FE0056981A /* Main.storyboard */,
+				789C168527AAE7000056981A /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -173,7 +197,7 @@
 				787AA62027ABC95B0031F5DC /* KinopoiskFilmsManager.swift in Sources */,
 				789C169127AAEBF70056981A /* FilmByKeyword.swift in Sources */,
 				789C169327AAED3A0056981A /* NetworkManager.swift in Sources */,
-				789C168F27AAE7610056981A /* TableViewController.swift in Sources */,
+				789C168F27AAE7610056981A /* SearchFilmsTableViewController.swift in Sources */,
 				787AA62527ABD9CA0031F5DC /* Film.swift in Sources */,
 				789C167D27AAE6FE0056981A /* SceneDelegate.swift in Sources */,
 				787AA62227ABD4490031F5DC /* FilmWithReleaseDate.swift in Sources */,

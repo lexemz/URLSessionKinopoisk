@@ -7,9 +7,10 @@
 
 import UIKit
 
-class TableViewController: UITableViewController {
+class SearchFilmsTableViewController: UITableViewController {
     
     var films: [Film] = []
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,4 +56,12 @@ class TableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         dump(films[indexPath.row])
     }
+}
+
+extension SearchFilmsTableViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        <#code#>
+    }
+    
+    
 }
