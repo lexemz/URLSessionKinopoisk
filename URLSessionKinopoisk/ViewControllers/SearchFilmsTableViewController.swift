@@ -60,8 +60,22 @@ extension SearchFilmsTableViewController {
         var content = cell.defaultContentConfiguration()
         let filmForCell = films[indexPath.row]
         
-        content.text = filmForCell.nameRu
-        content.secondaryText = filmForCell.nameEn
+        switch filmForCell.nameRu {
+            
+        case .none:
+            content.text = filmForCell.nameEn
+        case .some(let nameRU):
+            content.text = nameRU
+        }
+
+        content.secondaryText = filmForCell.releases.reduce("") { partialResult, release in
+            guard let string = partialResult else { return partialResult }
+            var returnderString = string
+            returnderString += "\(release.country ?? "NULL"): \(release.date ?? "Неизвестно") \n"
+            
+            return returnderString
+        }
+        
         content.imageProperties.cornerRadius = 10
         
         DispatchQueue.global().async {

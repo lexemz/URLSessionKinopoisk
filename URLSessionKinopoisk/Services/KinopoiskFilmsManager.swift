@@ -27,7 +27,8 @@ final class KinopoiskFilmsManager {
             }
             
             var films: [Film] = []
-            dump(films)
+//            dump(films)
+            
             for film in upcomingFilms {
                 self.fetchFilmDistributionInfo(filmID: film.filmId) { filmWithDistributionInfo in
                     let film = Film.createFilm(film: film, release: filmWithDistributionInfo)
@@ -35,7 +36,6 @@ final class KinopoiskFilmsManager {
                     films.append(film)
                     if films.count  == upcomingFilms.count {
                         completionHandler(films)
-                        
                     }
                 }
             }
