@@ -27,11 +27,10 @@ final class KinopoiskFilmsManager {
             }
             
             var films: [Film] = []
-//            dump(films)
             
             for film in upcomingFilms {
                 self.fetchFilmDistributionInfo(filmID: film.filmId) { filmWithDistributionInfo in
-                    let film = Film.createFilm(film: film, release: filmWithDistributionInfo)
+                    let film = Film.uniteFilmAndReleaseInfo(film: film, release: filmWithDistributionInfo)
                     
                     films.append(film)
                     if films.count  == upcomingFilms.count {
@@ -77,3 +76,4 @@ final class KinopoiskFilmsManager {
         return calendar.component(.year, from: date)
     }
 }
+

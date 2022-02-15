@@ -19,20 +19,24 @@ struct Film {
     
     let releases: [Release]
     
-    static func createFilm(film: FilmByKeyword, release: FilmWithReleaseDate) -> Film {
+    static func uniteFilmAndReleaseInfo(film: FilmByKeyword, release: FilmWithReleaseDate) -> Film {
         
         // Иногда API возвращает дату релиза в стане несколько раз
         // Очищаем дубликаты: страна - дата
+        // Также фильтруем страны, где релиз неизвестен
         let releases = release.items.reduce([]) { array, item -> [Release] in
             var array = array
             
             if !array.contains(where: {
                 $0.country == item.country?.country && $0.date == item.date
             }) {
+                
                 array.append(Release(date: item.date, country: item.country?.country))
             }
             
             return array
+        }.filter { release in
+            release.date != nil
         }
         
         let film = Film(
