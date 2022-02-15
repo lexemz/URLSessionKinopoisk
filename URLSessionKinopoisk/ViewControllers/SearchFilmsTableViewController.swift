@@ -42,12 +42,19 @@ class SearchFilmsTableViewController: UITableViewController {
     }
     
     private func fetchData(filmName: String) {
-
         KinopoiskFilmsManager.shared.findFilmsWithDistributionInfo(name: filmName) { films in
             self.films = films
             self.tableView.reloadData()
-        } faulireHandler: {
-            print("Data is empty")
+        } faulireHandler: { error in
+            switch error {
+                
+            case KinopoiskFilmsManagerError.noFilms:
+                self.films = []
+                self.tableView.reloadData()
+            default:
+                print(error)
+            }
+
         }
     }
     
@@ -63,7 +70,8 @@ class SearchFilmsTableViewController: UITableViewController {
 // MARK: - Table view delegate
 extension SearchFilmsTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        dump(films[indexPath.row])
+        Log.dumpData(films[indexPath.row])
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
  
