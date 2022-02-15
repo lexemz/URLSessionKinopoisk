@@ -32,7 +32,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Find Film" id="vO6-eB-aM0">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="2BW-zK-ETM">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="2BW-zK-ETM">
                             <connections>
                                 <action selector="dismissViewController:" destination="a8J-yJ-zne" id="UcU-ZH-Xvc"/>
                             </connections>
