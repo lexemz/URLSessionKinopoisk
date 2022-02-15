@@ -9,6 +9,12 @@ import UIKit
 
 class SearchFilmsTableViewController: UITableViewController {
     
+    private let searchController = UISearchController(searchResultsController: nil)
+    private var seatchBarIsEmpty: Bool {
+        guard let text = searchController.searchBar.text else { return false }
+        return text.isEmpty
+    }
+    
     private var films: [Film] = []
     var filmFromTextfield: String?
     
@@ -17,15 +23,27 @@ class SearchFilmsTableViewController: UITableViewController {
         
         tableView.rowHeight = 150
         
-        fetchData()
+        firstRequest()
+        
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Type anything"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
     }
     
-    private func fetchData() {
-        guard let filmFromTextfield = filmFromTextfield else {
+    private func firstRequest() {
+        guard let filmFromTextfield = filmFromTextfield, filmFromTextfield != "" else {
             return
         }
+        searchController.searchBar.text = filmFromTextfield
 
-        KinopoiskFilmsManager.shared.findFilmsWithDistributionInfo(name: filmFromTextfield) { films in
+        fetchData(filmName: filmFromTextfield)
+    }
+    
+    private func fetchData(filmName: String) {
+
+        KinopoiskFilmsManager.shared.findFilmsWithDistributionInfo(name: filmName) { films in
             self.films = films
             self.tableView.reloadData()
         } faulireHandler: {
@@ -89,5 +107,11 @@ extension SearchFilmsTableViewController {
         
         cell.contentConfiguration = content
         return cell
+    }
+}
+
+extension SearchFilmsTableViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        fetchData(filmName: searchController.searchBar.text ?? "")
     }
 }
