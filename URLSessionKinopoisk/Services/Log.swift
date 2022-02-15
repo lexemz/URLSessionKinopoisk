@@ -35,7 +35,7 @@ class Log {
         let result = """
         
         [DEBUG] -----
-        [ERROR]: \(error))
+        [ERROR]: \(error)
         [DESCRIPTION]: \(error.localizedDescription)
         [FILE]: \(extractFileName(from: file))
         [LINE]: \(line)
@@ -43,6 +43,29 @@ class Log {
         
         """
         print(result)
+    }
+    
+    static func dumpData(
+        _ data: @autoclosure () -> Any?,
+        file: String = #file,
+        line: Int = #line
+    ) {
+        let result = """
+             
+        [DUMP] -----
+        [DATA]:
+        """
+        
+        let result2 = """
+        [FILE]: \(extractFileName(from: file))
+        [LINE]: \(line)
+        [END] -------
+                
+        """
+        
+        print(result)
+        dump(data())
+        print(result2)
     }
     
     private static func extractFileName(from path: String) -> String {

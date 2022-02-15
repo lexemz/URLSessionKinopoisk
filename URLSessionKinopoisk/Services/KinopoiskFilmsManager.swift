@@ -7,6 +7,10 @@
 
 import Foundation
 
+enum KinopoiskFilmsManagerError: Error {
+    case noFilms
+}
+
 final class KinopoiskFilmsManager {
     
     static let shared = KinopoiskFilmsManager()
@@ -16,32 +20,54 @@ final class KinopoiskFilmsManager {
     
     private init() {}
     
-    func findFilmsWithDistributionInfo(name: String, completionHandler: @escaping ([Film]) -> Void, faulireHandler: @escaping () -> Void) {
+    func findFilmsWithDistributionInfo(
+        name: String,
+        completionHandler: @escaping ([Film]) -> Void,
+        faulireHandler: @escaping (Error) -> Void
+    ) {
         
-        fetchFilmsList(keyword: name) { films in
-            let upcomingFilms = films.filter { Int($0.year ?? "") ?? 0 >= self.getCurrentYear() && $0.rating == "null" }
-            
-            guard upcomingFilms.count != 0 else {
-                faulireHandler()
-                return
-            }
-            
-            var films: [Film] = []
-            
-            for film in upcomingFilms {
-                self.fetchFilmDistributionInfo(filmID: film.filmId) { filmWithDistributionInfo in
-                    let film = Film.uniteFilmAndReleaseInfo(film: film, release: filmWithDistributionInfo)
+        fetchFilmsList(keyword: name) { result in
+            switch result {
+                
+            case .success(let films):
+                let upcomingFilms = films.filter { Int($0.year ?? "") ?? 0 >= self.getCurrentYear() && $0.rating == "null" }
+                
+                guard upcomingFilms.count != 0 else {
+                    let noFilmsError = KinopoiskFilmsManagerError.noFilms
                     
-                    films.append(film)
-                    if films.count  == upcomingFilms.count {
-                        completionHandler(films)
+                    Log.error(noFilmsError)
+                    faulireHandler(noFilmsError)
+                    return
+                }
+                
+//                Log.debug(films)
+                var films: [Film] = []
+                
+                for film in upcomingFilms {
+                    self.fetchFilmDistributionInfo(filmID: film.filmId) { result in
+                        switch result {
+                            
+                        case .success(let filmWithDistributionInfo):
+                            let film = Film.uniteFilmAndReleaseInfo(film: film, release: filmWithDistributionInfo)
+                            
+                            films.append(film)
+                            if films.count  == upcomingFilms.count {
+                                completionHandler(films)
+                            }
+                        case .failure(let error):
+                            Log.error(error)
+                        }
                     }
                 }
+            case .failure(let error):
+                Log.error(error)
+                faulireHandler(error)
             }
+            
         }
     }
     
-    private func fetchFilmsList(keyword: String, completionHandler: @escaping ([FilmByKeyword]) -> Void){
+    private func fetchFilmsList(keyword: String, completionHandler: @escaping (Result<[FilmByKeyword], NetworkError>) -> Void){
         
         let queryItem = URLQueryItem(name: "keyword", value: keyword)
         
@@ -49,23 +75,23 @@ final class KinopoiskFilmsManager {
             switch result {
                 
             case .success(let films):
-                completionHandler(films.films)
+                completionHandler(.success(films.films))
             case .failure(let error):
-                print(error)
+                completionHandler(.failure(error))
             }
         }
     }
     
-    private func fetchFilmDistributionInfo(filmID: Int, completionHandler: @escaping (FilmWithReleaseDate) -> Void) {
+    private func fetchFilmDistributionInfo(filmID: Int, completionHandler: @escaping (Result<FilmWithReleaseDate, NetworkError>) -> Void) {
         let stringURL = "\(filmIDLink)/\(filmID)/distributions"
         
         NetworkManager.shared.fetch(FilmWithReleaseDate.self, from: stringURL) { result in
             switch result {
                 
             case .success(let filmDistributionInfo):
-                completionHandler(filmDistributionInfo)
+                completionHandler(.success(filmDistributionInfo))
             case .failure(let error):
-                print(error)
+                completionHandler(.failure(error))
             }
         }
     }
