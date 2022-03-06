@@ -22,8 +22,7 @@ final class KinopoiskFilmsManager {
     
     func findFilmsWithDistributionInfo(
         name: String,
-        completionHandler: @escaping ([Film]) -> Void,
-        faulireHandler: @escaping (Error) -> Void
+        completionHandler: @escaping (Result<[Film], Error>) -> Void
     ) {
         
         fetchFilmsList(keyword: name) { result in
@@ -35,12 +34,10 @@ final class KinopoiskFilmsManager {
                 guard upcomingFilms.count != 0 else {
                     let noFilmsError = KinopoiskFilmsManagerError.noFilms
                     
-                    Log.error(noFilmsError)
-                    faulireHandler(noFilmsError)
+                    completionHandler(.failure(noFilmsError))
                     return
                 }
                 
-//                Log.debug(films)
                 var films: [Film] = []
                 
                 for film in upcomingFilms {
@@ -52,16 +49,16 @@ final class KinopoiskFilmsManager {
                             
                             films.append(film)
                             if films.count  == upcomingFilms.count {
-                                completionHandler(films)
+                                completionHandler(.success(films))
                             }
                         case .failure(let error):
-                            Log.error(error)
+                            completionHandler(.failure(error))
                         }
                     }
                 }
             case .failure(let error):
                 Log.error(error)
-                faulireHandler(error)
+                completionHandler(.failure(error))
             }
             
         }

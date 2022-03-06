@@ -42,19 +42,19 @@ class SearchFilmsTableViewController: UITableViewController {
     }
     
     private func fetchData(filmName: String) {
-        KinopoiskFilmsManager.shared.findFilmsWithDistributionInfo(name: filmName) { films in
-            self.films = films
-            self.tableView.reloadData()
-        } faulireHandler: { error in
-            switch error {
-                
-            case KinopoiskFilmsManagerError.noFilms:
+        KinopoiskFilmsManager.shared.findFilmsWithDistributionInfo(name: filmName) { result in
+            switch result {
+
+            case .success(let films):
+                self.films = films
+                self.tableView.reloadData()
+            case .failure(let error):
+                Log.error(error)
                 self.films = []
                 self.tableView.reloadData()
-            default:
-                print(error)
+                
+                // Print error
             }
-
         }
     }
     
@@ -120,6 +120,10 @@ extension SearchFilmsTableViewController {
 
 extension SearchFilmsTableViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
+        if searchController.searchBar.text == "" {
+            films = []
+        }
+        
         fetchData(filmName: searchController.searchBar.text ?? "")
     }
 }
