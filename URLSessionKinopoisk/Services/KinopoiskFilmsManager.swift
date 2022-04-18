@@ -12,7 +12,6 @@ enum KinopoiskFilmsManagerError: Error {
 }
 
 final class KinopoiskFilmsManager {
-    
     static let shared = KinopoiskFilmsManager()
     
     private let keywordLink = "https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword"
@@ -43,12 +42,11 @@ final class KinopoiskFilmsManager {
                 for film in upcomingFilms {
                     self.fetchFilmDistributionInfo(filmID: film.filmId) { result in
                         switch result {
-                            
                         case .success(let filmWithDistributionInfo):
                             let film = Film.uniteFilmAndReleaseInfo(film: film, release: filmWithDistributionInfo)
                             
                             films.append(film)
-                            if films.count  == upcomingFilms.count {
+                            if films.count == upcomingFilms.count {
                                 completionHandler(.success(films))
                             }
                         case .failure(let error):
@@ -57,10 +55,9 @@ final class KinopoiskFilmsManager {
                     }
                 }
             case .failure(let error):
-                Log.error(error)
+                Logger.error(error)
                 completionHandler(.failure(error))
             }
-            
         }
     }
     
@@ -70,7 +67,6 @@ final class KinopoiskFilmsManager {
         
         NetworkManager.shared.fetchWithComponents(FilmsByKeyword.self, from: keywordLink, with: [queryItem]) { result in
             switch result {
-                
             case .success(let films):
                 completionHandler(.success(films.films))
             case .failure(let error):
@@ -84,7 +80,6 @@ final class KinopoiskFilmsManager {
         
         NetworkManager.shared.fetch(FilmWithReleaseDate.self, from: stringURL) { result in
             switch result {
-                
             case .success(let filmDistributionInfo):
                 completionHandler(.success(filmDistributionInfo))
             case .failure(let error):
@@ -99,4 +94,3 @@ final class KinopoiskFilmsManager {
         return calendar.component(.year, from: date)
     }
 }
-

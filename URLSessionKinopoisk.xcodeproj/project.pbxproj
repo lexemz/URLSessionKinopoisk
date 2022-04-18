@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		781A7BBD27BACBA6005E3716 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781A7BBC27BACBA6005E3716 /* Log.swift */; };
+		781A7BBD27BACBA6005E3716 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781A7BBC27BACBA6005E3716 /* Logger.swift */; };
 		787AA62027ABC95B0031F5DC /* KinopoiskFilmsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787AA61F27ABC95B0031F5DC /* KinopoiskFilmsManager.swift */; };
 		787AA62227ABD4490031F5DC /* FilmWithReleaseDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787AA62127ABD4490031F5DC /* FilmWithReleaseDate.swift */; };
 		787AA62527ABD9CA0031F5DC /* Film.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787AA62427ABD9CA0031F5DC /* Film.swift */; };
@@ -23,7 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		781A7BBC27BACBA6005E3716 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		781A7BBC27BACBA6005E3716 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		787AA61F27ABC95B0031F5DC /* KinopoiskFilmsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinopoiskFilmsManager.swift; sourceTree = "<group>"; };
 		787AA62127ABD4490031F5DC /* FilmWithReleaseDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmWithReleaseDate.swift; sourceTree = "<group>"; };
 		787AA62427ABD9CA0031F5DC /* Film.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Film.swift; sourceTree = "<group>"; };
@@ -64,9 +64,9 @@
 		787AA62627AC6E340031F5DC /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				789C169227AAED3A0056981A /* NetworkManager.swift */,
 				787AA61F27ABC95B0031F5DC /* KinopoiskFilmsManager.swift */,
-				781A7BBC27BACBA6005E3716 /* Log.swift */,
+				789C169227AAED3A0056981A /* NetworkManager.swift */,
+				781A7BBC27BACBA6005E3716 /* Logger.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -201,7 +201,7 @@
 			files = (
 				789C167B27AAE6FE0056981A /* AppDelegate.swift in Sources */,
 				787AA62027ABC95B0031F5DC /* KinopoiskFilmsManager.swift in Sources */,
-				781A7BBD27BACBA6005E3716 /* Log.swift in Sources */,
+				781A7BBD27BACBA6005E3716 /* Logger.swift in Sources */,
 				789C169127AAEBF70056981A /* FilmByKeyword.swift in Sources */,
 				789C169327AAED3A0056981A /* NetworkManager.swift in Sources */,
 				789C168F27AAE7610056981A /* SearchFilmsTableViewController.swift in Sources */,

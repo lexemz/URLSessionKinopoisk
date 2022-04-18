@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Log {
+class Logger {
     private init() {}
     
     static func debug(

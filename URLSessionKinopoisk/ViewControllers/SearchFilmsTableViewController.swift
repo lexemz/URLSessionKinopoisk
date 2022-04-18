@@ -49,11 +49,11 @@ class SearchFilmsTableViewController: UITableViewController {
                 self.films = films
                 self.tableView.reloadData()
             case .failure(let error):
-                Log.error(error)
+                Logger.error(error)
                 self.films = []
                 self.tableView.reloadData()
                 
-                // Print error
+                // TODO: Error Alert
             }
         }
     }
@@ -70,7 +70,7 @@ class SearchFilmsTableViewController: UITableViewController {
 // MARK: - Table view delegate
 extension SearchFilmsTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        Log.dumpData(films[indexPath.row])
+        Logger.dumpData(films[indexPath.row])
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
