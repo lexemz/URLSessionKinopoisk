@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		781A7BBD27BACBA6005E3716 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 781A7BBC27BACBA6005E3716 /* Logger.swift */; };
+		7861BFD2280D7FC50018FC30 /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7861BFD1280D7FC50018FC30 /* CalendarManager.swift */; };
 		787AA62027ABC95B0031F5DC /* KinopoiskFilmsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787AA61F27ABC95B0031F5DC /* KinopoiskFilmsManager.swift */; };
 		787AA62227ABD4490031F5DC /* FilmWithReleaseDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787AA62127ABD4490031F5DC /* FilmWithReleaseDate.swift */; };
 		787AA62527ABD9CA0031F5DC /* Film.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787AA62427ABD9CA0031F5DC /* Film.swift */; };
@@ -24,6 +25,7 @@
 
 /* Begin PBXFileReference section */
 		781A7BBC27BACBA6005E3716 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		7861BFD1280D7FC50018FC30 /* CalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
 		787AA61F27ABC95B0031F5DC /* KinopoiskFilmsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinopoiskFilmsManager.swift; sourceTree = "<group>"; };
 		787AA62127ABD4490031F5DC /* FilmWithReleaseDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilmWithReleaseDate.swift; sourceTree = "<group>"; };
 		787AA62427ABD9CA0031F5DC /* Film.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Film.swift; sourceTree = "<group>"; };
@@ -67,6 +69,7 @@
 				787AA61F27ABC95B0031F5DC /* KinopoiskFilmsManager.swift */,
 				789C169227AAED3A0056981A /* NetworkManager.swift */,
 				781A7BBC27BACBA6005E3716 /* Logger.swift */,
+				7861BFD1280D7FC50018FC30 /* CalendarManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -199,6 +202,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7861BFD2280D7FC50018FC30 /* CalendarManager.swift in Sources */,
 				789C167B27AAE6FE0056981A /* AppDelegate.swift in Sources */,
 				787AA62027ABC95B0031F5DC /* KinopoiskFilmsManager.swift in Sources */,
 				781A7BBD27BACBA6005E3716 /* Logger.swift in Sources */,

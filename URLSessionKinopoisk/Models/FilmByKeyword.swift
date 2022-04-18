@@ -22,3 +22,10 @@ struct FilmByKeyword: Decodable {
     
     let posterUrlPreview: String?
 }
+
+extension FilmByKeyword {
+    var notReleased: Bool {
+        Int(self.year ?? "") ?? 0 >= CalendarManager.shared.currentYear &&
+        self.rating == "null"
+    }
+}

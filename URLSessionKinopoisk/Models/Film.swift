@@ -18,9 +18,15 @@ struct Film {
     let posterUrlPreview: String?
     
     let releases: [Release]
-    
-    static func uniteFilmAndReleaseInfo(film: FilmByKeyword, release: FilmWithReleaseDate) -> Film {
-        
+}
+
+struct Release {
+    let date: String?
+    let country: String?
+}
+
+extension Film {
+    init(film: FilmByKeyword, release: FilmWithReleaseDate) {
         // Иногда API возвращает дату релиза в стане несколько раз
         // Очищаем дубликаты: страна - дата
         // Также фильтруем страны, где релиз неизвестен
@@ -39,7 +45,7 @@ struct Film {
             release.date != nil
         }
         
-        let film = Film(
+        self.init(
             filmId: film.filmId,
             nameRu: film.nameRu,
             nameEn: film.nameEn,
@@ -49,11 +55,5 @@ struct Film {
             posterUrlPreview: film.posterUrlPreview,
             releases: releases
         )
-        return film
     }
-}
-
-struct Release {
-    let date: String?
-    let country: String?
 }

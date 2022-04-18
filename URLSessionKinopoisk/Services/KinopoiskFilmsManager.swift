@@ -23,28 +23,25 @@ final class KinopoiskFilmsManager {
         name: String,
         completionHandler: @escaping (Result<[Film], Error>) -> Void
     ) {
-        
-        fetchFilmsList(keyword: name) { result in
+        fetchFilmsList(keyword: name) { [weak self] result in
             switch result {
-                
             case .success(let films):
-                let upcomingFilms = films.filter { Int($0.year ?? "") ?? 0 >= self.getCurrentYear() && $0.rating == "null" }
-                
+                let upcomingFilms = films.filter { $0.notReleased }
+
                 guard upcomingFilms.count != 0 else {
                     let noFilmsError = KinopoiskFilmsManagerError.noFilms
-                    
                     completionHandler(.failure(noFilmsError))
                     return
                 }
-                
+
                 var films: [Film] = []
-                
+
                 for film in upcomingFilms {
-                    self.fetchFilmDistributionInfo(filmID: film.filmId) { result in
+                    self?.fetchFilmDistributionInfo(filmID: film.filmId) { result in
                         switch result {
                         case .success(let filmWithDistributionInfo):
-                            let film = Film.uniteFilmAndReleaseInfo(film: film, release: filmWithDistributionInfo)
-                            
+                            let film = Film(film: film, release: filmWithDistributionInfo)
+
                             films.append(film)
                             if films.count == upcomingFilms.count {
                                 completionHandler(.success(films))
@@ -61,11 +58,19 @@ final class KinopoiskFilmsManager {
         }
     }
     
-    private func fetchFilmsList(keyword: String, completionHandler: @escaping (Result<[FilmByKeyword], NetworkError>) -> Void){
-        
+    
+    typealias ResultWithFilms = Result<[FilmByKeyword], NetworkError>
+    private func fetchFilmsList(
+        keyword: String,
+        completionHandler: @escaping (ResultWithFilms) -> Void
+    ) {
         let queryItem = URLQueryItem(name: "keyword", value: keyword)
         
-        NetworkManager.shared.fetchWithComponents(FilmsByKeyword.self, from: keywordLink, with: [queryItem]) { result in
+        NetworkManager.shared.fetchWithComponents(
+            FilmsByKeyword.self,
+            from: keywordLink,
+            with: [queryItem]
+        ) { result in
             switch result {
             case .success(let films):
                 completionHandler(.success(films.films))
@@ -75,10 +80,17 @@ final class KinopoiskFilmsManager {
         }
     }
     
-    private func fetchFilmDistributionInfo(filmID: Int, completionHandler: @escaping (Result<FilmWithReleaseDate, NetworkError>) -> Void) {
+    typealias ResultWithFilmReleaseDate = Result<FilmWithReleaseDate, NetworkError>
+    private func fetchFilmDistributionInfo(
+        filmID: Int,
+        completionHandler: @escaping (ResultWithFilmReleaseDate) -> Void
+    ) {
         let stringURL = "\(filmIDLink)/\(filmID)/distributions"
         
-        NetworkManager.shared.fetch(FilmWithReleaseDate.self, from: stringURL) { result in
+        NetworkManager.shared.fetch(
+            FilmWithReleaseDate.self,
+            from: stringURL
+        ) { result in
             switch result {
             case .success(let filmDistributionInfo):
                 completionHandler(.success(filmDistributionInfo))
@@ -86,11 +98,5 @@ final class KinopoiskFilmsManager {
                 completionHandler(.failure(error))
             }
         }
-    }
-    
-    private func getCurrentYear() -> Int {
-        let date = Date()
-        let calendar = Calendar.current
-        return calendar.component(.year, from: date)
     }
 }
