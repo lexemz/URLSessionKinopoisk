@@ -22,6 +22,7 @@ class SearchFilmsTableViewController: UITableViewController {
         super.viewDidLoad()
         
         tableView.rowHeight = 150
+        // TODO: Make custom cell with the same imageView size
         
         firstRequest()
         
@@ -86,12 +87,10 @@ extension SearchFilmsTableViewController {
         var content = cell.defaultContentConfiguration()
         let filmForCell = films[indexPath.row]
         
-        switch filmForCell.nameRu {
-            
-        case .none:
+        if let name = filmForCell.nameRu {
+            content.text = name
+        } else {
             content.text = filmForCell.nameEn
-        case .some(let nameRU):
-            content.text = nameRU
         }
 
         content.secondaryText = filmForCell.releases.reduce("") { partialResult, release in
